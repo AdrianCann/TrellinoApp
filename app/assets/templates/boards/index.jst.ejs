@@ -1,3 +1,21 @@
-<% boards.each(function(board) { %>
- <li><%= board.escape("title") %></li>
-<% }) %>
+<h2>Boards Index</h2>
+
+<ul>
+  <% boards.each(function(board) { %>
+   <li>
+     <% var id = board.get("id") %>
+     <a href="#/boards/<%= id %>">
+       <%= board.escape("title") %>
+     </a>
+     &nbsp;
+     <button class="delete-board" data-board-id="<%= id %>">
+       Delete Board
+     </button>
+  </li>
+  <% }) %>
+</ul>
+
+<br>
+<a href="#/boards/new">Create New Board</a>
+<br>
+<a href="#/lists/new">Create New List</a>

@@ -1,0 +1,37 @@
+<h2>Create New List</h2>
+
+<form class='new-list'>
+  <label>
+    Title
+    <input type="text" name="list[title]">
+  </label>
+  <br>
+
+  <label>
+    Rank
+    <select name="list[rank]">
+        <option value="">Select Rank</option>
+          <% for(var i = 1; i <= 10; i++) { %>
+            <option value="<%= i %>">
+              <%= i %>
+            </option>
+          <% } %>
+      </select>
+  </label>
+  <br>
+
+  <label>
+    Board
+    <select name="list[board_id]">
+      <option value="">Select Board</option>
+        <% boards.each(function(board) { %>
+          <option value="<%= board.get("id") %>">
+            <%= board.escape("title") %>
+          </option>
+        <% }) %>
+    </select>
+  </label>
+  <br>
+
+  <button class="create-new-list">Create New List</button>
+</form>

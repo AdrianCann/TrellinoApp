@@ -1,11 +1,11 @@
 Trellino.Views.NewBoard = Backbone.View.extend({
 
-  template: JST['templates/new'],
+  template: JST['boards/new'],
   tagName: 'form',
   className: 'new-board',
 
   events: {
-    "submit form.new-board": "submitForm"
+    "click button.new-board": "submitForm"
   },
 
   render: function() {
@@ -19,22 +19,23 @@ Trellino.Views.NewBoard = Backbone.View.extend({
   submitForm: function(event) {
     event.preventDefault();
 
-    var attrs = $(event.currentTarget).serializeJSON();
+    var newBoard = this.model;
+    var $form = $(event.currentTarget).closest("form");
+    var attrs = $form.serializeJSON();
 
     var success = function() {
-      Backbone.history.navigate('', {trigger: true})
+      Backbone.history.navigate("#/boards/" + newBoard.get("id"), {trigger: true})
     };
 
-    this.model.set(attrs);
-    if (this.model.isNew()) {
-      this.collection.create(this.model, {
+    newBoard.set(attrs);
+    if (newBoard.isNew()) {
+      this.collection.create(newBoard, {
         success: success
       });
     } else {
-      this.model.save({
+      newBoard.save({
         success: success
       });
     }
   }
-
 });
