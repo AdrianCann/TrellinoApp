@@ -27,6 +27,7 @@ Trellino.Views.BoardsIndex = Backbone.View.extend({
 
     var id = $(event.currentTarget).attr("data-board-id");
     var board = this.collection.get(id);
+
     board.destroy();
   }
 });
